@@ -1,1 +1,2 @@
 # marena-registration-app
+The objective of the “MARENA REGISTRATION APPLICATION” is to provide students with an online facility which can be effectively utilized for registering the student at the MARENA Sports Complex for various sports and recreational activities such as swimming, football, gymnasium etc. The automated system allows you to enter your personal details, select a package for what kind of services you want to avail and make the payment for the same.
