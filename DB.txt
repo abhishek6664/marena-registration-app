@@ -1,0 +1,415 @@
+R52548-STEAM RECOVERY CODE
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Oct 24 22:10:38 2018
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> create table admin(
+  2  '
+  3  ;
+'
+*
+ERROR at line 2:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> create table temp(
+  2  id integer,
+  3  name varchar(20),
+  4  username varchar(30),
+  5  password varchar(50));
+
+Table created.
+
+SQL> insert into temp(1234,'admin1','extra','14124124');
+insert into temp(1234,'admin1','extra','14124124')
+                 *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table temp(
+  2  id numeric,
+  3  name varchar(20),
+  4  username varchar(20),
+  5  password varchar(20))l
+  6  );
+password varchar(20))l
+                     *
+ERROR at line 5:
+ORA-00922: missing or invalid option
+
+
+SQL> create table temp(
+  2  id numeric,
+  3  name varchar(20),
+  4  username varchar(20),
+  5  password varchar(20));
+
+Table created.
+
+SQL> insert into temp values(1234,'admin1','man','423124');
+
+1 row created.
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table ADMIN(
+  2  admin-id varchar(30),
+  3  name varchar(30),
+  4  username varchar(30),
+  5  password varchar(30));
+admin-id varchar(30),
+     *
+ERROR at line 2:
+ORA-00902: invalid datatype
+
+
+SQL> create table ADMIN(
+  2  admin_id varchar(30),
+  3  name varchar(30),
+  4  username varchar(30),
+  5  password varchar(30));
+
+Table created.
+
+SQL> create table STUDENT(
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> drop table admin;
+
+Table dropped.
+
+SQL> create table admin(
+  2  admin_id varchar(30),
+  3  name varchar(30),
+  4  username varchar(30),
+  5  password varchar(30),
+  6  primary key(admin_id));
+
+Table created.
+
+SQL> create table student(
+  2  reg_no varchar(10),
+  3  username varchar(30
+  4  ),
+  5  password varchar(30),
+  6  branch varchar(5),
+  7  gender varchar(1),
+  8  package varchar(10),
+  9  address varchar(40),
+ 10  mobile numeric,
+ 11  stud_email varchar(20),
+ 12  college varchar(10),
+ 13  year varchar(1),
+ 14  semester varchar(1),
+ 15  name varchar(30),
+ 16  primary key(reg_no));
+
+Table created.
+
+SQL> create table teaching_staff(
+  2  email_id varchar(30),
+  3  password_ts varchar(30),
+  4  dob_ts varchar(30),
+  5  gender_ts varchar(1),
+  6  address_ts varchar(40),
+  7  mobile_ts numeric,
+  8  department varchar(30),
+  9  name_ts varchar(30));
+
+Table created.
+
+SQL> drop table student
+  2  ;
+
+Table dropped.
+
+SQL> create table student(
+  2  reg_no varchar(10),
+  3  username varchar(30
+  4  ),
+  5  ;
+
+*
+ERROR at line 5:
+ORA-00904: : invalid identifier
+
+
+SQL> create table student(
+  2  reg_no varchar(10),
+  3  username_ts varchar(30
+  4  ),
+  5  password_ varchar(30),
+  6  ;
+
+*
+ERROR at line 6:
+ORA-00904: : invalid identifier
+
+
+SQL> create table student(
+  2  reg_no varchar(10),
+  3  username_s varchar(30
+  4  );
+)
+*
+ERROR at line 4:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student(
+  2  reg_no varchar(10),
+  3  username_s varchar(30),
+  4  password_s varchar(30),
+  5  branch varchar(5),
+  6  gender_s varchar(1),
+  7  package_s varchar(10),
+  8  address_s varchar(40),
+  9  mobile_s numeric,
+ 10  stud_email varchar(20),
+ 11  college varchar(10),
+ 12  year varchar(1),
+ 13  semester varchar(1),
+ 14  name_s varchar(30),
+ 15  primary key(reg_no));
+
+Table created.
+
+SQL> create table non_teachning_staff(
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> create table non_teaching_staff(
+  2  employee_id varchar(10),
+  3  password_nts varchar(20),
+  4  dob_nts varchar(30)
+  5  ,
+  6  gender_nts varchar(1),
+  7  package_nts varchar(30),
+  8  address_nts varchar(40),
+  9  mobile_nts numeric,
+ 10  employee_dept varchar(20),
+ 11  name_nts varchar(30),
+ 12  );
+)
+*
+ERROR at line 12:
+ORA-00904: : invalid identifier
+
+
+SQL> create table non_teaching_staff(
+  2  employee_id varchar(10),
+  3  password_nts varchar(20),
+  4  dob_nts varchar(30)
+  5  ,
+  6  gender_nts varchar(1),
+  7  package_nts varchar(30),
+  8  address_nts varchar(40),
+  9  mobile_nts numeric,
+ 10  employee_dept varchar(20),
+ 11  name_nts varchar(30),
+ 12  primary key(employee_id));
+
+Table created.
+
+SQL> create table package(
+  2  package_id varchar(20),
+  3  mobile numeric,
+  4  email varchar(30),
+  5  name_p varchar(30),
+  6  type_of_login varchar(10),
+  7  primary key(package_id));
+
+Table created.
+
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  mobile numeric,
+  4  package_id varchar(20),
+  5  amount numeric,
+  6  method_of_pay varchar(10),
+  7  foreign key(name_p) references package(name_p),
+  8  foreign key(mobile) references package(mobile),
+  9  foreign key(package_id) references package(package_id));
+foreign key(name_p) references package(name_p),
+                                       *
+ERROR at line 7:
+ORA-02270: no matching unique or primary key for this column-list
+
+
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  mobile numeric,
+  4
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  mobile numeric,
+  4  package_id varchar(20),
+  5  amount numeric,
+  6  method_of_pay varchar(10),
+  7  foreign key(name_p) references package,
+  8  foreign key(mobile) references package,
+  9  foreign key(package_id) references package);
+foreign key(mobile) references package,
+            *
+ERROR at line 8:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  mobile numeric,
+  4  package_id varchar(20),'
+  5  ;
+package_id varchar(20),'
+                       *
+ERROR at line 4:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  package_id varchar(20),'
+  4
+SQL> create table payment(
+  2  name_p varchar(30),
+  3  package_id varchar(20),
+  4  amount numeric,
+  5  method_of_pay varchar(10),
+  6  foreign key(name_p) references package,
+  7  foreign key(package_id) references package);
+
+Table created.
+
+SQL> create table sports(
+  2  sport_name varchar(30),
+  3  level varchar(2),
+  4  requirements varchar(20));
+level varchar(2),
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> create table sports(
+  2  sport_name varchar(30),
+  3  level varchar(10),
+  4  requirements varchar(20)
+  5  .
+SQL> create table sports(
+  2  sport_name varchar(30),
+  3  level varchar(10),
+  4  requirements varchar(20),
+  5  primary key(sport_name));
+level varchar(10),
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> create table sports(
+  2  sport_name varchar(30),
+  3  floor varchar(10),
+  4  requirements varchar(20),
+  5  primary key(sport_name));
+
+Table created.
+
+SQL>
+
+
+
+
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Nov 4 18:57:55 2018
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> alter table student
+  2  add unique(username_s);
+
+Table altered.
+
+SQL> alter table teaching_staff
+  2  add unique(username_ts);
+
+Table altered.
+
+SQL> alter table non_teaching_staff
+  2  add unique(username_nts);
+
+Table altered.
+
+SQL> alter table student
+  2  alter column mobiles_s varchar;
+alter column mobiles_s varchar
+*
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table student
+  2  modify mobile_s varchar;
+modify mobile_s varchar
+                      *
+ERROR at line 2:
+ORA-00906: missing left parenthesis
+
+
+SQL> alter table student
+  2  alter column mobiles_s varchar(12);
+alter column mobiles_s varchar(12)
+*
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table student
+  2  modify mobile_s varchar(15);
+modify mobile_s varchar(15)
+       *
+ERROR at line 2:
+ORA-01439: column to be modified must be empty to change datatype
+
+
+SQL> alter table student
+  2  modify mobile_s varchar(15);
+
+Table altered.
+
+SQL> alter table teaching_staff
+  2  modify mobile_ts varchar(15);
+
+Table altered.
+
+SQL> alter table non_teaching_staff
+  2  modify mobile_nts varchar(15);
+
+Table altered.
+
+SQL>

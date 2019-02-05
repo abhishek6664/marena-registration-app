@@ -1,0 +1,119 @@
+TRIGGERS
+create or replace trigger teaching_staff_del
+after delete on teaching_staff
+for each row
+begin
+insert into delusers values(:old.username_ts,:old.name_ts,:old.package_ts);
+delete from payment where username_p=:old.username_ts;
+delete from package where username_pa=:old.username_ts;
+end;
+/
+
+create or replace trigger non_teaching_staff_del
+after delete on non_teaching_staff
+for each row
+begin
+insert into delusers values(:old.username_nts,:old.name_nts,:old.package_nts);
+delete from payment where username_p=:old.username_nts;
+delete from package where username_pa=:old.username_nts;
+end;
+/
+
+create or replace trigger student_del
+after delete on student
+for each row
+begin
+insert into delusers values(:old.username_s,:old.name_s,:old.package_s);
+delete from payment where username_p=:old.username_s;
+delete from package where username_pa=:old.username_s;
+end;
+/
+
+PROCEDURES
+CREATE OR REPLACE PROCEDURE P1(u in varchar,p in varchar,m in varchar,e in varchar,n in varchar,temp in out varchar) AS
+counter integer;
+begin
+select count(*) into counter from student s where s.username_s=u;
+if (counter>0) then
+dbms_output.put_line('Already exists');
+temp:='Already Exists';
+else
+insert into student(username_s,password_s,mobile_s,stud_email,name_s) values(u,p,m,e,n);
+dbms_output.put_line('Inserted');
+temp:='Inserted';
+end if;
+end;
+/
+
+CREATE OR REPLACE PROCEDURE P2(u in varchar,p in varchar,m in varchar,e in varchar,n in varchar,temp in out varchar) AS
+counter integer;
+begin
+select count(*) into counter from teaching_staff t where t.username_ts=n;
+if (counter>0) then
+dbms_output.put_line('Already exists');
+temp:='Already exists';
+else
+insert into teaching_staff(email_id,password_ts,mobile_ts,name_ts,username_ts) values(u,p,m,e,n);
+dbms_output.put_line('Inserted');
+temp:='Inserted';
+end if;
+end;
+/
+
+CREATE OR REPLACE PROCEDURE P3(u in varchar,p in varchar,m in varchar,e in varchar,n in varchar,temp in out varchar) AS
+counter integer;
+begin
+select count(*) into counter from non_teaching_staff nt where nt.username_nts=n;
+if (counter>0) then
+dbms_output.put_line('Already exists');
+temp:='Already exists';
+else
+insert into non_teaching_staff(password_nts,mobile_nts,name_nts,email_id_nts,username_nts) values(u,p,m,e,n);
+dbms_output.put_line('Inserted');
+temp:='Inserted';
+end if;
+end;
+/
+
+NESTED SUBQUERIES
+select Name_p,Amount,Package_Pay from payment where username_p in(select username_s from student where username_s='"+u+"')";
+
+select Name_p,Amount,Package_Pay from payment where username_p in(select username_ts from teaching_staff where username_ts='"+u+"')";
+
+select Name_p,Amount,Package_Pay from payment where username_p in(select username_nts from non_teaching_staff where username_nts='"+u+"')";
+
+select * from student where username_s in(select username_p from payment where username_p='"+username+"')";
+
+select * from teaching_staff where username_ts in(select username_p from payment where username_p='"+username+"')";
+
+select * from non_teaching_staff where username_nts in(select username_p from payment where username_p='"+username+"')";
+
+
+FUNCTIONS WITH CURSOR
+create or replace function sports_print
+Return varchar
+as
+cursor c is select * from sports;
+temp c%rowtype;
+begin
+open c;
+fetch c into temp;
+loop
+dbms_output.put_line('Name'||temp.sport_name);
+dbms_output.put_line('Level'||temp.floor);
+dbms_output.put_line('Requirements'||temp.requirements);
+fetch c into temp;
+exit when c%notfound;
+end loop;
+close c;
+return 'Success';
+end;
+/
+
+declare 
+var varchar(200);
+begin
+var:=sports_print();
+dbms_output.put_line(var);
+end;
+/
